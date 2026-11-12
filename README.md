@@ -55,6 +55,10 @@ camera is up. Your weather sync is untouched and takes over again afterwards.
 | `Config.Weather` | Weather held while the camera is up, or `false` to leave it alone. |
 | `Config.Hour` | Hour of day held while the camera is up, or `false` to leave it alone. |
 
+## Author
+
+Made by [DaemonAlex](https://github.com/DaemonAlex) for DelPerroSands.
+
 ## Other DPS scripts
 
 All of these are made for DelPerroSands and run together on one Qbox server. Each one works on
