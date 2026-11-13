@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>DelPerroSands</title>
+<style>
+  html, body { margin: 0; height: 100%; background: transparent; overflow: hidden; }
+  /* never takes a click: whatever is under it stays usable */
+  #cover {
+    position: fixed; inset: 0; display: none; pointer-events: none;
+    background: #0e1a2b;
+    align-items: center; justify-content: center; flex-direction: column; gap: 2.2vh;
+    opacity: 1; transition: opacity 600ms ease-out;
+    font-family: Roboto, "Segoe UI", Arial, sans-serif;
+  }
+  #cover.on { display: flex; }
+  #cover.out { opacity: 0; }
+  #cover img { width: 22vw; max-width: 420px; height: auto; }
+  #cover p { margin: 0; color: #f2ead9; font-size: 1.7vh; letter-spacing: 0.18em; text-transform: uppercase; }
+  #bar { width: 12vw; max-width: 230px; height: 3px; background: #1b2e45; overflow: hidden; }
+  #bar i { display: block; width: 40%; height: 100%; background: #ff7a45; animation: slide 1.4s ease-in-out infinite; }
+  @keyframes slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(250%); } }
+</style>
+</head>
+<body>
+<div id="cover">
+  <img src="dps-logo.svg" alt="DelPerroSands">
+  <div id="bar"><i></i></div>
+  <p id="text"></p>
+</div>
+<script>
+  const cover = document.getElementById('cover');
+  const text = document.getElementById('text');
+  window.addEventListener('message', (event) => {
+    const data = event.data || {};
+    if (data.action !== 'hold') return;
+    if (data.show) {
+      text.textContent = data.text || '';
+      cover.style.transitionDuration = '0ms';
+      cover.classList.remove('out');
+      cover.classList.add('on');
+      return;
+    }
+    const fade = Math.max(0, Number(data.fade) || 600);
+    cover.style.transitionDuration = fade + 'ms';
+    cover.classList.add('out');
+    setTimeout(() => cover.classList.remove('on'), fade + 50);
+  });
+</script>
+</body>
+</html>

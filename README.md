@@ -20,6 +20,32 @@ want, sharp and clear. The first thing a player sees of your server is a view yo
 It does not create a camera of its own and does not touch wasabi_multichar's files, so an update
 to the paid script does not undo it.
 
+## The hold, and the falling character
+
+Two things added on 13 November 2026, both for the moment just after the loading screen ends.
+
+**The hold.** A plain navy cover with the logo stays up until the world has loaded, so nobody
+watches it being built. It waits until the game has stopped asking for models and textures and
+has stayed quiet for a moment. It never takes the mouse or keyboard, runs once per join, and
+always lets go after `Config.Hold.max`. To give everything longer to load, raise
+`Config.Hold.min`.
+
+**The falling character.** The game drops the default character into the world near the camera,
+250 m up, and it used to fall straight past the lens. The player's own body is now hidden and
+held still while the welcome camera is up, and put back as it was afterwards.
+
+| Setting | Default | Meaning |
+|---|---|---|
+| `Config.Hold.enabled` | `true` | Turn the hold on. |
+| `Config.Hold.min` | `4000` | Shortest time the cover stays up, in milliseconds. |
+| `Config.Hold.max` | `15000` | Longest it can ever stay up. |
+| `Config.Hold.maxRequests`, `quiet` | `2`, `1500` | The world counts as loaded when the game waits for no more than this many pieces, for this long. |
+| `Config.Hold.fade` | `700` | How long the cover takes to fade. |
+| `Config.Hold.text` | `'Loading the city'` | The line under the logo. |
+| `Config.Hold.debug` | `true` | Prints how long each hold lasted to the F8 console. |
+| `Config.HideBody` | `true` | Hide and hold the player's body while the welcome camera is up. |
+| `Config.HideBodyRadius` | `400.0` | Only a body within this many metres of the camera is touched. |
+
 ## On its own, and with other scripts
 
 **On its own it does nothing.** It is a helper for one paid script. Without wasabi_multichar there
@@ -54,6 +80,11 @@ camera is up. Your weather sync is untouched and takes over again afterwards.
 | `Config.Sharp` | `true` switches off the depth-of-field blur. |
 | `Config.Weather` | Weather held while the camera is up, or `false` to leave it alone. |
 | `Config.Hour` | Hour of day held while the camera is up, or `false` to leave it alone. |
+
+## Recent changes
+
+- **13 November 2026.** Version 1.1.0: the hold after the loading screen, and the default character no longer falls past the camera.
+- **12 November 2026.** First version: aims the welcome camera, clears blur and haze.
 
 ## Author
 
